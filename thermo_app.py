@@ -48,7 +48,7 @@ st.markdown(
     }}
 
     .stButton > button:hover {{
-        background-color: #ff85c1;
+        background-color: #000000;
     }}
 
     /* Top right logo container */
