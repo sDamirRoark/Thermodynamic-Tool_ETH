@@ -59,6 +59,10 @@ st.markdown(
         z-index: 9999;
         width: 300px;
     }}
+    /* Hide alt text fallback if image fails */
+    .top-right-logo img {{
+        display: block;
+    }}
 
     .top-right-logo img {{
         width: 100%;
