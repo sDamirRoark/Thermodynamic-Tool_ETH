@@ -37,7 +37,7 @@ st.markdown(
 
     /* Style the "Get Properties" button */
     .stButton > button {{
-        background-color: #ff69b4;  /* pink */
+        background-color: #f5f5DC;  /* pink */
         color: white;
         border: none;
         padding: 8px 20px;
