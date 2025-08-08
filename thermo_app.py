@@ -5,7 +5,7 @@ from PIL import Image
 # ===== CONFIG =====
 st.set_page_config(page_title="Thermodynamic Tool")
 
-logo_path = "deMlogo.png"
+logo_path = "deMlogo.jpg"
 excel_path = "Thermodynamic_Database.xlsx"
 
 # Custom CSS: background, text colors, input boxes, button style, logo positioning, cursor style
