@@ -56,6 +56,22 @@ st.markdown(
     <div class="top-right-logo">
         <img src="{logo_path}" alt="Logo">
     </div>
+    """
+    <style>
+    .stButton > button {
+        background-color: #ff69b4;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .stButton > button:hover {
+        background-color: #ff85c1;
+    }
+    </style>
     """,
     unsafe_allow_html=True
 )
