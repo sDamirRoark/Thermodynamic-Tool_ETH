@@ -64,7 +64,10 @@ st.markdown(
         width: 100%;
         height: auto;
     }}
-
+/* Hide alt text fallback if image fails to load */
+    .top-right-logo img {{
+        display: block;
+    }}
     /* Pointer cursor for mode selectbox */
     [data-baseweb="select"] {{
       cursor: pointer !important;
