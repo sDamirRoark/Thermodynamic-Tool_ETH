@@ -1,43 +1,75 @@
 import pandas as pd
 import streamlit as st
+from PIL import Image
 
 # ===== CONFIG =====
 st.set_page_config(page_title="Thermodynamic Tool")
 
 # ===== LOGO (Top Right) =====
-# Replace with your actual file path or URL
 logo_path = "deMlogo.png"
 excel_path = "Thermodynamic_Database.xlsx"
+
+# Custom CSS for styling
 st.markdown(
     f"""
     <style>
+    /* Page background and text */
     [data-testid="stAppViewContainer"] {{
         background-color: white;
         color: black;
     }}
+
+    /* Footer text */
+    div[style*="text-align:center"] {{
+        color: black !important;
+        font-size: 18px;
+    }}
+
+    /* Input boxes - keep white background and black text */
+    .stTextInput>div>div>input,
+    .stNumberInput>div>div>input,
+    textarea {{
+        background-color: white !important;
+        color: black !important;
+    }}
+
+    /* Placeholder text color */
+    ::placeholder {{
+        color: #555 !important;
+    }}
+
+    /* Top right logo container */
     .top-right-logo {{
         position: absolute;
         top: 10px;
         right: 10px;
+        z-index: 9999;
+        width: 300px;
+    }}
+
+    .top-right-logo img {{
+        width: 100%;
+        height: auto;
     }}
     </style>
+
     <div class="top-right-logo">
-        <img src="{logo_path}" width="100">
+        <img src="{logo_path}" alt="Logo">
     </div>
     """,
     unsafe_allow_html=True
 )
 
-from PIL import Image
+# Load and display logo also (optional, but you have it)
 logo = Image.open(logo_path)
-st.image(logo, width=300)
+st.image(logo, width=300)  # You can keep or remove this line if CSS logo is enough
 
 # Load Excel data
 sat_temp_df = pd.read_excel(excel_path, sheet_name="B1.1-Satd.Water")
 sat_press_df = pd.read_excel(excel_path, sheet_name="B1.2-Satd.WaterPressEntry")
 superheat_df = pd.read_excel(excel_path, sheet_name="B1.3-SuperheatedVapor")
 
-# Interpolation helper
+# Interpolation helper function
 def interpolate(df, key, value, outputs):
     df_sorted = df.sort_values(by=key).reset_index(drop=True)
     if value in df_sorted[key].values:
