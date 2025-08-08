@@ -8,7 +8,7 @@ st.set_page_config(page_title="Thermodynamic Tool")
 logo_path = "deMlogo.png"
 excel_path = "Thermodynamic_Database.xlsx"
 
-# Custom CSS: background, text colors, input boxes, button style, logo positioning
+# Custom CSS: background, text colors, input boxes, button style, logo positioning, cursor style
 st.markdown(
     f"""
     <style>
@@ -37,7 +37,7 @@ st.markdown(
 
     /* Style the "Get Properties" button */
     .stButton > button {{
-        background-color: #000000;  /* pink */
+        background-color: #ff69b4;  /* pink */
         color: white;
         border: none;
         padding: 8px 20px;
@@ -48,7 +48,7 @@ st.markdown(
     }}
 
     .stButton > button:hover {{
-        background-color: #000000;
+        background-color: #ff85c1;
     }}
 
     /* Top right logo container */
@@ -64,6 +64,11 @@ st.markdown(
         width: 100%;
         height: auto;
     }}
+
+    /* Pointer cursor for mode selectbox */
+    [data-baseweb="select"] {{
+      cursor: pointer !important;
+    }}
     </style>
 
     <div class="top-right-logo">
@@ -73,7 +78,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Load and display logo (optional, you have the CSS logo already)
+# Display logo (optional, since we use CSS to place it)
 logo = Image.open(logo_path)
 st.image(logo, width=300)
 
@@ -101,29 +106,68 @@ mode = st.selectbox(
 if mode == "Saturated Water (by Temperature)":
     T = st.number_input("Enter Temperature (°C)", min_value=float(sat_temp_df["T"].min()), 
                         max_value=float(sat_temp_df["T"].max()))
-    outputs = ["P (kPa)", "vf", "v_fg", "v_g", "u_f", "u_fg", "u_g", "h_f", "h_fg", "h_g", "s_f", "s_fg", "s_g"]
+    outputs = ["P", "v_f", "v_fg", "v_g", "u_f", "u_fg", "u_g", "h_f", "h_fg", "h_g", "s_f", "s_fg", "s_g"]
+    units = {
+        "P": "kPa",
+        "v_f": "m³/kg",
+        "v_fg": "m³/kg",
+        "v_g": "m³/kg",
+        "u_f": "kJ/kg",
+        "u_fg": "kJ/kg",
+        "u_g": "kJ/kg",
+        "h_f": "kJ/kg",
+        "h_fg": "kJ/kg",
+        "h_g": "kJ/kg",
+        "s_f": "kJ/kg·K",
+        "s_fg": "kJ/kg·K",
+        "s_g": "kJ/kg·K"
+    }
     if st.button("Get Properties"):
         result = interpolate(sat_temp_df, "T", T, outputs)
-        st.write(result)
+        result_with_units = {k: f"{v:.4g} {units.get(k, '')}" for k, v in result.items()}
+        st.write(result_with_units)
 
 elif mode == "Saturated Water (by Pressure)":
     P = st.number_input("Enter Pressure (kPa)", min_value=float(sat_press_df["P"].min()), 
                         max_value=float(sat_press_df["P"].max()))
     outputs = ["T", "v_f", "v_fg", "v_g", "u_f", "u_fg", "u_g", "h_f", "h_fg", "h_g", "s_f", "s_fg", "s_g"]
+    units = {
+        "T": "°C",
+        "v_f": "m³/kg",
+        "v_fg": "m³/kg",
+        "v_g": "m³/kg",
+        "u_f": "kJ/kg",
+        "u_fg": "kJ/kg",
+        "u_g": "kJ/kg",
+        "h_f": "kJ/kg",
+        "h_fg": "kJ/kg",
+        "h_g": "kJ/kg",
+        "s_f": "kJ/kg·K",
+        "s_fg": "kJ/kg·K",
+        "s_g": "kJ/kg·K"
+    }
     if st.button("Get Properties"):
         result = interpolate(sat_press_df, "P", P, outputs)
-        st.write(result)
+        result_with_units = {k: f"{v:.4g} {units.get(k, '')}" for k, v in result.items()}
+        st.write(result_with_units)
 
-else:
+else:  # Superheated Vapor
     P = st.selectbox("Select Pressure (MPa)", sorted(superheat_df["P"].unique()))
     T = st.number_input("Enter Temperature (°C)", 
                         min_value=float(superheat_df["T"].min()), 
                         max_value=float(superheat_df["T"].max()))
     df_p = superheat_df[superheat_df["P"] == P]
     outputs = ["v", "u", "h", "s"]
+    units = {
+        "v": "m³/kg",
+        "u": "kJ/kg",
+        "h": "kJ/kg",
+        "s": "kJ/kg·K"
+    }
     if st.button("Get Properties"):
         result = interpolate(df_p, "T", T, outputs)
-        st.write(result)
+        result_with_units = {k: f"{v:.4g} {units.get(k, '')}" for k, v in result.items()}
+        st.write(result_with_units)
 
 # Footer
 st.markdown(
