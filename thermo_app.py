@@ -35,7 +35,7 @@ st.markdown(
 
     /* Placeholder text color */
     ::placeholder {{
-        color: white !important;
+        color: #ffffff !important;
     }}
 
     /* Top right logo container */
