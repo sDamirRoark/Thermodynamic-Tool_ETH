@@ -6,7 +6,7 @@ st.set_page_config(page_title="Thermodynamic Tool")
 
 # ===== LOGO (Top Right) =====
 # Replace with your actual file path or URL
-logo_path = "deMlogo.jpg"
+logo_path = "deMlogo.png"
 excel_path = "Thermodynamic_Database.xlsx"
 st.markdown(
     f"""
