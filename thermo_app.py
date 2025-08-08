@@ -30,7 +30,7 @@ st.markdown(
     .stNumberInput>div>div>input,
     textarea {{
         background-color: white !important;
-        color: black !important;
+        color: white !important;
     }}
 
     /* Placeholder text color */
