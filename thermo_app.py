@@ -37,7 +37,7 @@ st.markdown(
 
     /* Style the "Get Properties" button */
     .stButton > button {{
-        background-color: #ffffff;  /* pink */
+        background-color: #000000;
         color: white;
         border: none;
         padding: 8px 20px;
@@ -48,7 +48,7 @@ st.markdown(
     }}
 
     .stButton > button:hover {{
-        background-color: #ff85c1;
+        background-color: #000000;
     }}
 
     /* Top right logo container */
