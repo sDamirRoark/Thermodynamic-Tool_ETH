@@ -101,7 +101,7 @@ mode = st.selectbox(
 if mode == "Saturated Water (by Temperature)":
     T = st.number_input("Enter Temperature (°C)", min_value=float(sat_temp_df["T"].min()), 
                         max_value=float(sat_temp_df["T"].max()))
-    outputs = ["P", "v_f", "v_fg", "v_g", "u_f", "u_fg", "u_g", "h_f", "h_fg", "h_g", "s_f", "s_fg", "s_g"]
+    outputs = ["P (kPa)", "vf", "v_fg", "v_g", "u_f", "u_fg", "u_g", "h_f", "h_fg", "h_g", "s_f", "s_fg", "s_g"]
     if st.button("Get Properties"):
         result = interpolate(sat_temp_df, "T", T, outputs)
         st.write(result)
