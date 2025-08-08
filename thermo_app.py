@@ -174,7 +174,7 @@ st.markdown(
     """
     <hr style="margin-top:50px">
     <div style="text-align:center; font-size:18px;">
-        Made with ❤️ by <a href="https://www.linkedin.com/in/suyashsachindamir/" target="_blank">Suyash</a>
+        Made with <span style="color: red;">❤️</span> by <a href="https://www.linkedin.com/in/suyashsachindamir/" target="_blank">Suyash</a>
         in <a href="https://www.demellogroup.ethz.ch/">deMello group</a>
     </div>
     """,
