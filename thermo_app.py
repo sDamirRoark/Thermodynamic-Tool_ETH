@@ -30,7 +30,7 @@ st.markdown(
 
 from PIL import Image
 logo = Image.open(logo_path)
-st.image(logo, width=100)
+st.image(logo, width=300)
 
 # Load Excel data
 sat_temp_df = pd.read_excel(excel_path, sheet_name="B1.1-Satd.Water")
